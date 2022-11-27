@@ -4,6 +4,8 @@ import {
 } from 'electron';
 import Store from 'electron-store';
 
+require('electron').Menu.setApplicationMenu(null);
+
 export default function createWindow(windowName, options) {
   const key = 'window-state';
   const name = `window-state-${windowName}`;
@@ -74,6 +76,9 @@ export default function createWindow(windowName, options) {
       contextIsolation: false,
       ...options.webPreferences,
     },
+    minWidth: 780,
+    minHeight: 500,
+    icon: __dirname + '/resources/icon.ico',
   });
 
   win.on('close', saveState);

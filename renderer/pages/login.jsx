@@ -1,30 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import { APP_NAME } from '../../structure/constants';
+import TextInput from '../components/TextField';
 
-function Home() {
+function Login() {
+
+  const [foxCounter, setFoxCounter] = useState(0);
+
+  const submitHandler = (e) => { 
+    e.preventDefault();
+    window.location.href = "/sales"
+  }
+
+  const clickFoxHandler = (e) => {
+    e.preventDefault();
+
+    setFoxCounter(foxCounter + 1);
+  }
+
+
   return (
     <React.Fragment>
       <Head>
-        <title>Home - Nextron (with-javascript-tailwindcss)</title>
+        <title>{APP_NAME }</title>
       </Head>
-      <div className='grid grid-col-1 text-2xl w-full text-center'>
-        <img className='ml-auto mr-auto' src='/images/logo.png' />
-        <span>⚡ Electron ⚡</span>
-        <span>+</span>
-        <span>Next.js</span>
-        <span>+</span>
-        <span>tailwindcss</span>
-        <span>=</span>
-        <span>💕 </span>
-      </div>
-      <div className='mt-1 w-full flex-wrap flex justify-center'>
-        <Link href='/next'>
-          <a className='btn-blue'>Go to next page</a>
-        </Link>
+      <div className='flex items-center justify-center w-full min-h-screen bg-gray-700 p-1'>
+        <div className='flex flex-col bg-white rounded-3xl p-6 lg:p-12 z-10'>
+          <div className='flex flex-row mb-9 items-center justify-center'>
+            <img onClick={clickFoxHandler} className='active:brightness-0' src='/images/logo.png' width={150}/>
+            <span className='uppercase font-bold text-3xl'>{ APP_NAME }</span>
+          </div>
+
+          <form className='flex flex-col items-center space-y-6'>
+            <TextInput label={"Usuario"} type={"text"} name={"username"}/>
+            <TextInput label={"Contraseña"} isPassword={true} name={"user_password"}/>
+
+            <button onClick={submitHandler} className='text-2xl py-3 px-12 font-semibold bg-yellow-400 hover:bg-yellow-300 transform hover:scale-105 mt-10 rounded-lg' type="submit">Iniciar Sesión</button>
+        </form>
+        </div>
+        <img className={`absolute ${foxCounter > 12 ? "sm:left-[10%] md:left-[13%] lg:left-[20%]" : "left-[50%]"} transition-all duration-1000 w-100`} src='/images/vibingFox.gif' width={150}/>
       </div>
     </React.Fragment>
   );
 }
 
-export default Home;
+export default Login;
