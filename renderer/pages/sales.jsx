@@ -4,6 +4,7 @@ import Link from "next/link";
 import { AiOutlineHome, AiOutlineBook, AiOutlineLogout } from "react-icons/ai";
 import { IoMdExit } from "react-icons/io";
 import { APP_NAME } from "../../structure/constants";
+import { useRouter } from "next/router";
 
 // Side Menu
 const MenuIconButton = ({ Icon, onClick }) => {
@@ -17,6 +18,8 @@ const MenuIconButton = ({ Icon, onClick }) => {
   );
 };
 const SideMenu = () => {
+  const router = useRouter();
+
   return (
     <section className="flex flex-col w-3/12 bg-white">
       <div className="flex flex-row text-4xl lg:text-5xl">
@@ -26,7 +29,7 @@ const SideMenu = () => {
           Icon={IoMdExit}
           onClick={(e) => {
             e.preventDefault();
-            window.location.href = "/login";
+            router.push("/login");
           }}
         />
       </div>
@@ -34,7 +37,7 @@ const SideMenu = () => {
       <div className="flex flex-col w-full items-center flex-grow border-l border-black space-y-4 lg:space-y-8  py-1 lg:py-4">
         <div className="flex flex-col w-full items-center">
           <h2 className="text-2xl lg:text-3xl font-semibold">Escanear</h2>
-          <img className="w-3/4" src="/images/scan.png" />
+          <img className="w-3/4 pointer-events-none" src="/images/scan.png" />
           <input type="text" className="border border-gray-900 rounded focus:border-white w-10/12 px-2 py-1 md:text-lg lg:text-2xl text-center"
           />
         </div>
@@ -55,11 +58,11 @@ const SalesSection = () => {
   return (
     <section className="flex p-4 md:p-7 lg:p-10 w-10/12">
       <div className="flex justify-between flex-grow flex-col bg-white rounded-2xl p-6 md:p-8 lg:p-10">
-        <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold">
+        <h2 className="text-xl lg:text-3xl font-semibold">
           Lista de artículos
         </h2>
         <div className="flex-grow w-full h-[30vh] my-3 md:my-5 lg:my-6 relative overflow-y-scroll">
-          <table className="w-full text-center text-xl md:text-2xl lg:text-3xl">
+          <table className="w-full text-center text-xl lg:text-3xl">
             <tbody>
               <tr>
                 <th>Nombre</th>
