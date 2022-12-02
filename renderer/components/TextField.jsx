@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
 
-const TextInput = ({ name, label, isPassword, vertical }) => {
+const TextField = ({ name, label, isPassword, vertical }) => {
 
     const [ showPassword, setShowPassword ] = useState(false);
 
@@ -27,4 +27,4 @@ const TextInput = ({ name, label, isPassword, vertical }) => {
     );
 }
 
-export default TextInput;
+export default TextField;

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { AiOutlineHome, AiOutlineBook, AiOutlineLogout } from "react-icons/ai";
 import { IoMdExit } from "react-icons/io";
 import { APP_NAME } from "../../structure/constants";
 import { useRouter } from "next/router";
+import PaymentWindow from "../components/paymentWindow";
 
 // Side Menu
 const MenuIconButton = ({ Icon, onClick }) => {
@@ -17,8 +18,15 @@ const MenuIconButton = ({ Icon, onClick }) => {
     </button>
   );
 };
-const SideMenu = () => {
+const SideMenu = ({ payingState }) => {
   const router = useRouter();
+  const [ paying, setPaying ] = payingState;
+
+  const payButtonHandler = (e) => {
+    e.preventDefault();
+
+    setPaying(true);
+  }
 
   return (
     <section className="flex flex-col w-3/12 bg-white">
@@ -47,7 +55,7 @@ const SideMenu = () => {
       </div>
 
       <div className="flex flex-col items-center border-l border-t border-black py-4">
-        <button className="text-btn text-white bg-green-500"> Efectivo </button>
+        <button className="text-btn text-white bg-green-500" onClick={payButtonHandler}> Efectivo </button>
       </div>
     </section>
   );
@@ -236,6 +244,8 @@ const SalesSection = () => {
 
 // Sales Screen
 const Sales = () => {
+  const [ paying, setPaying ] = useState(false);
+
   return (
     <React.Fragment>
       <Head>
@@ -243,7 +253,9 @@ const Sales = () => {
       </Head>
       <div className="flex flex-row w-full min-h-screen bg-gray-700">
         <SalesSection />
-        <SideMenu />
+        <SideMenu payingState={[ paying, setPaying ]}/>
+
+        { paying && <PaymentWindow payingState={[ paying, setPaying ]}/> }
       </div>
     </React.Fragment>
   );

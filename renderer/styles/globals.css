@@ -30,4 +30,10 @@
   .text-btn {
     @apply text-xl lg:text-3xl rounded-md w-3/4 px-4 py-1 lg:py-3 hover:opacity-90 transform hover:scale-105;
   }
+  .bill-btn {
+    @apply transform hover:scale-105;
+  }
+  .bill-img {
+    @apply pointer-events-none h-16 md:h-20 lg:h-24;
+  }
 }

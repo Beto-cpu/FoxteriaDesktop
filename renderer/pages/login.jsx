@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { APP_NAME } from '../../structure/constants';
-import TextInput from '../components/TextField';
+import TextField from '../components/TextField';
 import { useRouter } from "next/router";
 
 function Login() {
@@ -35,8 +35,8 @@ function Login() {
           </div>
 
           <form className='flex flex-col items-center space-y-6'>
-            <TextInput label={"Usuario"} type={"text"} name={"username"}/>
-            <TextInput label={"Contraseña"} isPassword={true} name={"user_password"}/>
+            <TextField label={"Usuario"} type={"text"} name={"username"}/>
+            <TextField label={"Contraseña"} isPassword={true} name={"user_password"}/>
 
             <button onClick={submitHandler} className='text-2xl py-3 px-12 font-semibold bg-yellow-400 hover:bg-yellow-300 transform hover:scale-105 mt-10 rounded-lg' type="submit">Iniciar Sesión</button>
         </form>
