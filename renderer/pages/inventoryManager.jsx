@@ -1,9 +1,19 @@
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { TbArrowBackUp } from "react-icons/tb";
 import EditProductPreview from "../components/editProductPreview";
 
 const InventoryManager = () => {
     const router = useRouter();
+    const [catalog, setCatalog] = useState([]);
+
+    useEffect(() => {
+      fetch('http://localhost:8080/api/products/')
+        .then((res) => res.json())
+        .then((data) => {
+          setCatalog(data)
+        })
+    }, [])
 
     const goBackHandler = (e) => {
         e.preventDefault;
@@ -30,7 +40,7 @@ const InventoryManager = () => {
 
                 <div className="grid grid-cols-3 lg:grid-cols-4 text-lg lg:text-xl overflow-y-scroll pr-2 h-[50vh] lg:h-[65vh]">
                     {
-                        [1,2,3,4,5,6,7,8,9,10].map(()=>(<EditProductPreview />))
+                        catalog.map((prod)=>(<EditProductPreview product={prod}/>))
                     }
                 </div>
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { TbArrowBackUp } from "react-icons/tb";
 import EditProductPreview from "../components/editProductPreview";
@@ -6,6 +6,17 @@ import { TfiMoney  } from "react-icons/tfi";
 
 const EditProduct = () => {
     const router = useRouter();
+    const [product, setProduct] = useState({});
+
+    console.log('http://localhost:8080/api/products/' + router.query.id)
+
+    useEffect(() => {
+      fetch('http://localhost:8080/api/products/' + router.query.id)
+        .then((res) => res.json())
+        .then((data) => {
+          setProduct(data)
+        })
+    }, [])
 
     const goBackHandler = (e) => {
         e.preventDefault;
@@ -35,20 +46,20 @@ const EditProduct = () => {
 
                         <div className="flex flex-col">
                             <label className="font-semibold" htmlFor="name">Nombre</label>
-                            <input name="name" className="w-full border border-gray-400 rounded py-1 px-2"></input>
+                            <input defaultValue={product.title} name="name" className="w-full border border-gray-400 rounded py-1 px-2"></input>
                         </div>
 
                         <div className="flex flex-col">
                             <label className="font-semibold" htmlFor="description">Descripción</label>
-                            <textarea name="description" cols="40" rows="5" className="w-full border border-gray-400 rounded py-1 px-2 resize-none"></textarea>
+                            <textarea defaultValue={product.slug} name="description" cols="40" rows="5" className="w-full border border-gray-400 rounded py-1 px-2 resize-none"></textarea>
                         </div>
 
                         <div className="flex flex-col">
                             <label className="font-semibold" htmlFor="category">Categoría</label>
-                            <select name="category" className="w-full border border-gray-400 rounded py-1 px-2 hover:cursor-pointer">
-                                <option value={"food"}>Comida</option>
-                                <option value={"beverage"}>Bebidas</option>
-                                <option value={"snacks"}>Botanas</option>
+                            <select defaultValue={product.category_id} name="category" className="w-full border border-gray-400 rounded py-1 px-2 hover:cursor-pointer">
+                                <option value={1}>Bebidas</option>
+                                <option value={2}>Botanas</option>
+                                <option value={3}>Comida</option>
                             </select>
                         </div>
 
@@ -56,7 +67,7 @@ const EditProduct = () => {
                             <label className="font-semibold" htmlFor="price">Precio</label>
                             <div className="relative">
                                 <TfiMoney className="absolute top-[10px] left-1"/>
-                                <input name="price" type="number" className="w-full border border-gray-400 rounded py-1 pr-2 pl-5"></input>                            
+                                <input defaultValue={product.price} name="price" type="number" className="w-full border border-gray-400 rounded py-1 pr-2 pl-5"></input>                            
                             </div>
                         </div>
 
@@ -64,7 +75,7 @@ const EditProduct = () => {
                     </div>
 
                     <div className="flex items-center justify-center border mx-20 my-2 p-5">
-                        <img className="max-w-[40vh]" src="http://cdn.shopify.com/s/files/1/0270/4651/0663/products/7501198355536_1200x1200.png?v=1637172517"/>
+                        <img className="" src={product.image}/>
                     </div>
                     
                 </div>

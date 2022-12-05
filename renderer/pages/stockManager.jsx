@@ -57,7 +57,7 @@ const StockManager = () => {
             <p className="font-semibold">Escanear</p>
             <input autoFocus onBlur={refocusHandler} type="text" maxLength={13} className="border border-gray-500 rounded py-1 px-2 text-center"></input>
           </div>
-          <ResponsiveTable headers={[ "Nombre", "Precio Unitario", "Cantidad", "Precio" ]}  rows = { [ ["Botella", 10.00, 2, 20.00] ] } border={true}/>
+          <ResponsiveTable headers={[ "Nombre", "Precio Unitario", "Cantidad", "Precio" ]}  rows = { [] } border={true}/>
           <div className="flex flex-row w-full justify-end space-x-6 text-2xl lg:text-4xl px-3 font-semibold">
             <p>Total:</p>
             <span>$375</span>
