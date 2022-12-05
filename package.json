@@ -18,8 +18,7 @@
   "dependencies": {
     "electron-serve": "^1.1.0",
     "electron-store": "^8.1.0",
-    "react-icons": "^4.6.0",
-    "react-tabs": "^6.0.0"
+    "react-icons": "^4.6.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.7",

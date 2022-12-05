@@ -6,13 +6,18 @@ import { IoMdExit } from "react-icons/io";
 import { APP_NAME } from "../../structure/constants";
 import { useRouter } from "next/router";
 import PaymentWindow from "../components/paymentWindow";
+import ResponsiveTable from "../components/responsiveTable";
 
 // Side Menu
-const MenuIconButton = ({ Icon, onClick }) => {
+const MenuIconButton = ({ Icon, onClick, disabled }) => {
   return (
     <button
       onClick={onClick || (() => {})}
-      className="group flex items-center justify-center flex-grow aspect-square border border-r-0 border-t-0 border-black p-3 lg:p-5 hover:cursor-pointer hover:bg-yellow-200 transform focus:outline-none"
+      className={
+        disabled
+          ? "hover:cursor-default flex items-center justify-center flex-grow aspect-square border border-r-0 border-t-0 border-black p-3 lg:p-5 bg-yellow-200 "
+          : "group flex items-center justify-center flex-grow aspect-square border border-r-0 border-t-0 border-black p-3 lg:p-5 hover:cursor-pointer hover:bg-yellow-200 transform focus:outline-none"
+      }
     >
       <Icon className="transform group-hover:scale-110" />
     </button>
@@ -20,19 +25,28 @@ const MenuIconButton = ({ Icon, onClick }) => {
 };
 const SideMenu = ({ payingState }) => {
   const router = useRouter();
-  const [ paying, setPaying ] = payingState;
+  const [paying, setPaying] = payingState;
 
   const payButtonHandler = (e) => {
     e.preventDefault();
 
     setPaying(true);
+  };
+  const refocusHandler = (e) => {
+    e.target.focus();
   }
 
   return (
     <section className="flex flex-col w-3/12 bg-white">
       <div className="flex flex-row text-4xl lg:text-5xl">
-        <MenuIconButton Icon={AiOutlineHome} />
-        <MenuIconButton Icon={AiOutlineBook} />
+        <MenuIconButton Icon={AiOutlineHome} disabled={true} />
+        <MenuIconButton
+          Icon={AiOutlineBook}
+          onClick={(e) => {
+            e.preventDefault();
+            router.push("/stockManager");
+          }}
+        />
         <MenuIconButton
           Icon={IoMdExit}
           onClick={(e) => {
@@ -46,16 +60,27 @@ const SideMenu = ({ payingState }) => {
         <div className="flex flex-col w-full items-center">
           <h2 className="text-2xl lg:text-3xl font-semibold">Escanear</h2>
           <img className="w-3/4 pointer-events-none" src="/images/scan.png" />
-          <input type="text" className="border border-gray-900 rounded focus:border-white w-10/12 px-2 py-1 md:text-lg lg:text-2xl text-center"
+          <input
+            type="text"
+            maxLength={13}
+            autoFocus
+            onBlur={refocusHandler}
+            className="border border-gray-900 rounded focus:border-white w-10/12 px-2 py-1 md:text-lg lg:text-2xl text-center"
           />
         </div>
 
         <button className="text-btn text-white bg-blue-500">Orden QR</button>
-        <button className="text-btn text-white bg-pink-500">Servicios</button>
+        <button className="disable-text-btn">Servicios</button>
       </div>
 
       <div className="flex flex-col items-center border-l border-t border-black py-4">
-        <button className="text-btn text-white bg-green-500" onClick={payButtonHandler}> Efectivo </button>
+        <button
+          className="text-btn text-white bg-green-500"
+          onClick={payButtonHandler}
+        >
+          {" "}
+          Efectivo{" "}
+        </button>
       </div>
     </section>
   );
@@ -69,169 +94,8 @@ const SalesSection = () => {
         <h2 className="text-xl lg:text-3xl font-semibold">
           Lista de artículos
         </h2>
-        <div className="flex-grow w-full h-[30vh] my-3 md:my-5 lg:my-6 relative overflow-y-scroll">
-          <table className="w-full text-center text-xl lg:text-3xl">
-            <tbody>
-              <tr>
-                <th>Nombre</th>
-                <th>Precio Unitario</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-              </tr>
-              <tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr>              <tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr>              <tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr><tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr><tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr><tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr><tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr><tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr><tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr><tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr><tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr><tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr><tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr><tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr><tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr><tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr><tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr><tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr><tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr>              <tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr>              <tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr>              <tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr>              <tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr>              <tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr>              <tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr>              <tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr>              <tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr>              <tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr>              <tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr>              <tr>
-                <td>Botella</td>
-                <td>10.00</td>
-                <td>2</td>
-                <td>20.00</td>
-              </tr>
-            </tbody>  
-          </table>
-        </div>
+        
+        <ResponsiveTable headers={[ "Nombre", "Precio Unitario", "Cantidad", "Precio" ]}  rows = { [ ["Botella", 10.00, 2, 20.00] ] }/>
 
         <div className="flex flex-row justify-between bg-yellow-100 px-5 py-3 rounded-xl text-xl md:text-2xl lg:text-3xl font-semibold">
           <p>Total:</p>
@@ -244,18 +108,18 @@ const SalesSection = () => {
 
 // Sales Screen
 const Sales = () => {
-  const [ paying, setPaying ] = useState(false);
+  const [paying, setPaying] = useState(false);
 
   return (
     <React.Fragment>
       <Head>
-        <title>{ APP_NAME }</title>
+        <title>{APP_NAME}</title>
       </Head>
       <div className="flex flex-row w-full min-h-screen bg-gray-700">
         <SalesSection />
-        <SideMenu payingState={[ paying, setPaying ]}/>
+        <SideMenu payingState={[paying, setPaying]} />
 
-        { paying && <PaymentWindow payingState={[ paying, setPaying ]}/> }
+        {paying && <PaymentWindow payingState={[paying, setPaying]} />}
       </div>
     </React.Fragment>
   );

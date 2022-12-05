@@ -30,7 +30,7 @@ function Login() {
       <div className='flex items-center justify-center w-full min-h-screen bg-gray-700 p-1'>
         <div className='flex flex-col bg-white rounded-3xl p-6 lg:p-12 z-10'>
           <div className='flex flex-row mb-9 items-center justify-center'>
-            <img onClick={clickFoxHandler} className='active:brightness-0 pointer-events-none' src='/images/logo.png' width={150}/>
+            <img onClick={clickFoxHandler} className='active:brightness-0' src='/images/logo.png' width={150}/>
             <span className='uppercase font-bold text-3xl'>{ APP_NAME }</span>
           </div>
 
