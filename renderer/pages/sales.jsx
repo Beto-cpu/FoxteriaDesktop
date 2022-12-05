@@ -60,6 +60,11 @@ const SideMenu = ({ payingState,productsState, catalog }) => {
       e.target.value = "";
     }
   }
+  const orderQrButtonHandler = (e) => {
+    e.preventDefault();
+
+    router.push('orderQr');
+  }
 
   return (
     <section className="flex flex-col w-3/12 bg-white">
@@ -95,7 +100,7 @@ const SideMenu = ({ payingState,productsState, catalog }) => {
           />
         </div>
 
-        <button className="text-btn text-white bg-blue-500">Orden QR</button>
+        <button onClick={orderQrButtonHandler} className="text-btn text-white bg-blue-500">Orden QR</button>
         <button className="disable-text-btn">Servicios</button>
       </div>
 

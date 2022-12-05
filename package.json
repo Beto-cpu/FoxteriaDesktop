@@ -16,6 +16,7 @@
     "build:linux": "nextron build --linux"
   },
   "dependencies": {
+    "@yudiel/react-qr-scanner": "^1.0.8",
     "electron-serve": "^1.1.0",
     "electron-store": "^8.1.0",
     "react-icons": "^4.6.0"
