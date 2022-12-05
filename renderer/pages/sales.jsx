@@ -7,6 +7,7 @@ import { APP_NAME } from "../../structure/constants";
 import { useRouter } from "next/router";
 import PaymentWindow from "../components/paymentWindow";
 import ResponsiveTable from "../components/responsiveTable";
+import PopupAlert from "../components/popupAlert";
 
 // Side Menu
 const MenuIconButton = ({ Icon, onClick, disabled }) => {
@@ -120,6 +121,7 @@ const Sales = () => {
         <SideMenu payingState={[paying, setPaying]} />
 
         {paying && <PaymentWindow payingState={[paying, setPaying]} />}
+
       </div>
     </React.Fragment>
   );
